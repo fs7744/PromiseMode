@@ -21,7 +21,7 @@ namespace PromiseMode
             {
                 try
                 {
-                    action(this);
+                    action(promise);
                 }
                 catch (Exception error)
                 {
@@ -48,7 +48,7 @@ namespace PromiseMode
                     if (m_Result != null && m_Result is Result<T>)
                     {
                         Result<T> result = m_Result as Result<T>;
-                        action(this, result.Value);
+                        action(promise, result.Value);
                     }
                     else
                     {
