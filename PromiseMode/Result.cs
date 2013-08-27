@@ -26,5 +26,10 @@ namespace PromiseMode
         {
             return typeof(T);
         }
+
+        public override string GetResultValueString()
+        {
+            return Value != null ? Value.ToString() : "null";
+        }
     }
 }

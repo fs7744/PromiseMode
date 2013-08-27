@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PromiseMode
 {
-    public class Promise : IPromise,INext
+    public class Promise : IPromise, INext
     {
         protected VirtualResult m_Result;
         protected Queue<Action<INext>> Chains;
@@ -52,7 +52,7 @@ namespace PromiseMode
                     }
                     else
                     {
-                        throw new ArgumentException(VirtualResult.ErrorInfo);
+                        throw ResultErrorHandler.GetException<T>(m_Result);
                     }
                 }
                 catch (Exception error)

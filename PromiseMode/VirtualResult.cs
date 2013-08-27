@@ -2,13 +2,25 @@
 
 namespace PromiseMode
 {
-    public class VirtualResult
+    public abstract class VirtualResult
     {
-        public const string ErrorInfo = "Argument maybe some error.";
+        public abstract Type GetResultType();
 
-        public virtual Type GetResultType()
+        public abstract string GetResultValueString();
+    }
+
+    public static class ResultErrorHandler
+    {
+        public const string ErrorInfo =
+            @"Argument maybe some error.
+            The method need {0}.
+            But the argument is {1} and it's value is {2}.";
+
+        public static ArgumentException GetException<T>(VirtualResult result)
         {
-            throw new NotImplementedException();
+            return new ArgumentException(string.Format(ErrorInfo, typeof(T).FullName,
+                result == null ? "null" : result.GetResultType().FullName,
+                result.GetResultValueString()));
         }
     }
 }
