@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    class Program
+    class Program 
     {
         static void Main(string[] args)
         {
@@ -16,17 +16,21 @@ namespace Test
                 i.Next(0);
             }).Then<int>((i,result) =>
             {
-                i.Next(result + 1);
+                Add(result, 1, j => i.Next(j));
             }).Then<int>((i,result) =>
             {
-                i.Next(result + 2);
+                Add(result, 2, j => i.Next(j));
             }).Then<int>((i,result) =>
             {
                 Console.WriteLine(result);
-                i.Next();
             }).Start();
 
             Console.ReadKey();
+        }
+
+        static void Add(int x,int y,Action<int> callBack)
+        {
+            callBack(x + y);
         }
     }
 }

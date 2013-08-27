@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace PromiseMode
 {
-    public class Promise : IPromise
+    public class Promise : IPromise,INext
     {
         protected VirtualResult m_Result;
-        protected Queue<Action<IPromise>> Chains;
+        protected Queue<Action<INext>> Chains;
 
         public Promise()
         {
-            Chains = new Queue<Action<IPromise>>();
+            Chains = new Queue<Action<INext>>();
         }
 
         #region IPromise
 
-        public IPromise Then(Action<IPromise> action, Action<Exception> errorAction = null)
+        public IPromise Then(Action<INext> action, Action<Exception> errorAction = null)
         {
             Chains.Enqueue(promise =>
             {
@@ -39,7 +39,7 @@ namespace PromiseMode
             return this;
         }
 
-        public IPromise Then<T>(Action<IPromise, T> action, Action<Exception> errorAction = null)
+        public IPromise Then<T>(Action<INext, T> action, Action<Exception> errorAction = null)
         {
             Chains.Enqueue(promise =>
             {
@@ -87,7 +87,7 @@ namespace PromiseMode
         {
             if (Chains.Count > 0)
             {
-                Action<IPromise> action = Chains.Dequeue();
+                Action<INext> action = Chains.Dequeue();
                 action(this);
             }
         }

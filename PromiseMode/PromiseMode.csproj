@@ -36,6 +36,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INext.cs" />
     <Compile Include="IPromise.cs" />
     <Compile Include="VirtualResult.cs" />
     <Compile Include="Promise.cs" />
