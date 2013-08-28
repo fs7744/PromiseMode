@@ -17,5 +17,5 @@ A Promise Mode for C#
         Add(result, 2, j => i.Next(j));
     }).Then<int>((i,result) =>
     {
-        Console.WriteLine(result);
+        Console.WriteLine(result);  // 3
     }).Start();
