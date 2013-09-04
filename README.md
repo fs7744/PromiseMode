@@ -6,7 +6,7 @@ A Promise Mode for C#
 
 	
 
-    PromiseFactory.When(i =>
+    new Promise().When(i =>
     {
         i.Next(0);
     }).Then<int>((i,result) =>
