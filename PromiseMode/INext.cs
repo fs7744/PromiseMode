@@ -4,8 +4,6 @@ namespace PromiseMode
 {
     public interface INext
     {
-        void Next();
-
-        void Next<T>(T result);
+        void Next(params dynamic[] args);
     }
 }
